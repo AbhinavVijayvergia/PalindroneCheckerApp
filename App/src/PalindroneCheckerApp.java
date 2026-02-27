@@ -1,50 +1,24 @@
 /**
  * ================================================================
- * MAIN CLASS – UseCase2PalindromeCheckerApp
+ * MAIN CLASS – PalindromeCheckerApp
  * ================================================================
  *
- * Use Case 2: Hardcoded Palindrome Validation
+ * Use Case 1: Application Entry & Welcome Message
  *
  * Description:
- * This class demonstrates basic palindrome validation
- * using a hardcoded string value.
+ * This class serves as the entry point of the
+ * Palindrome Checker App.
  *
  * At this stage, the application:
- * - Stores a predefined string
- * - Reverses the string using loop logic
- * - Compares the original and reversed strings
- * - Displays the result on the console
+ * - Initializes the program
+ * - Displays a welcome message
+ * - Guides the user toward the next use case
  *
- * This use case introduces fundamental string manipulation
- * and comparison logic before taking user input.
- *
- * @author Developer
- * @version 2.0
- */
-
-/**
- * ================================================================
- * MAIN CLASS – PalindroneCheckerApp
- * ================================================================
- *
- * Use Case 3: Palindrome Check Using String Reverse
- *
- * Description:
- * This class allows the user to input a string and
- * checks whether it is a palindrome by reversing
- * the string and comparing it with the original.
- *
- * At this stage, the application:
- * - Accepts user input via Scanner
- * - Reverses the input string using a for loop
- * - Compares the original and reversed strings
- * - Displays the palindrome check result on the console
- *
- * This use case demonstrates string reversal and
- * basic user interaction.
+ * This use case establishes the basic structure of
+ * a Java application before implementing palindrome logic.
  *
  * @author Developer
- * @version 3.0
+ * @version 1.0
  */
 
 /**
@@ -129,6 +103,6 @@ public class PalindroneCheckerApp {
         // --------------------------------------------------------
         // Step 6: Close Scanner Resource
         // --------------------------------------------------------
-        scanner.close();
+        System.out.println("Application started successfully.");
     }
 }
