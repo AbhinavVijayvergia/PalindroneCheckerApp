@@ -1,57 +1,44 @@
-/**
- * ================================================================
- * MAIN CLASS – PalindromeCheckerApp
- * ================================================================
- *
- * Use Case 1: Application Entry & Welcome Message
- *
- * Description:
- * This class serves as the entry point of the
- * Palindrome Checker App.
- *
- * At this stage, the application:
- * - Initializes the program
- * - Displays a welcome message
- * - Guides the user toward the next use case
- *
- * This use case establishes the basic structure of
- * a Java application before implementing palindrome logic.
- *
- * @author Developer
- * @version 1.0
- */
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * ================================================================
- * MAIN CLASS – PalindroneCheckerApp
+ * MAIN CLASS – UseCase6PalindromeCheckerApp
  * ================================================================
  *
- * Use Case 5: Stack-Based Palindrome Checker
+ * Use Case 6: Queue + Stack Based Palindrome Check
  *
  * Description:
- * This class checks whether a given string is a palindrome
- * by leveraging the Stack data structure to reverse
- * the input string.
+ * This class demonstrates palindrome validation using
+ * both Queue and Stack data structures to highlight
+ * the difference between FIFO (Queue) and LIFO (Stack).
  *
  * At this stage, the application:
- * - Takes user input via Scanner
- * - Pushes each character of the input string onto a stack
- * - Pops characters from the stack to compare with original string
- * - Determines palindrome status based on character comparisons
- * - Prints the result on the console
+ * - Accepts user input via Scanner
+ * - Enqueues characters into a Queue (FIFO)
+ * - Pushes characters onto a Stack (LIFO)
+ * - Compares dequeued characters with popped characters
+ * - Determines if the string is a palindrome
  *
- * This use case introduces the Stack collection and
- * demonstrates LIFO (Last In First Out) usage for palindrome checking.
+ * Key Concepts:
+ * - Queue: First In First Out (FIFO) principle
+ * - Stack: Last In First Out (LIFO) principle
+ * - Enqueue & Dequeue operations
+ * - Logical comparison of Queue vs Stack output
  *
- * @author Developer
- * @version 5.0
+ * Data Structures: Queue, Stack
+ *
+ * Author: Developer
+ * Version: 6.0
  */
 
-public class PalindroneCheckerApp {
+public class UseCase6PalindromeCheckerApp {
 
     /**
      * ============================================================
-     * Application Entry Point for UC5
+     * Application Entry Point for UC6
      * ============================================================
      *
      * @param args Command-line arguments
@@ -63,7 +50,8 @@ public class PalindroneCheckerApp {
         // --------------------------------------------------------
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("=== UC3: Palindrome Check Using String Reverse ===");
+        System.out.println("===== Palindrome Checker App =====");
+        System.out.println("UC6: Queue + Stack Based Palindrome Check");
         System.out.print("Enter a string: ");
 
         // --------------------------------------------------------
@@ -72,27 +60,35 @@ public class PalindroneCheckerApp {
         String input = scanner.nextLine();
 
         // --------------------------------------------------------
-        // Step 3: Initialize Stack and Push Characters
+        // Step 3: Initialize Queue and Stack
         // --------------------------------------------------------
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
+
+        // --------------------------------------------------------
+        // Step 4: Enqueue and Push characters
+        // --------------------------------------------------------
         for (int i = 0; i < input.length(); i++) {
-            stack.push(input.charAt(i));
+            char ch = input.charAt(i);
+            queue.add(ch);   // Enqueue character
+            stack.push(ch);  // Push character onto stack
         }
 
         // --------------------------------------------------------
-        // Step 4: Pop Characters and Compare to Original String
+        // Step 5: Compare dequeue vs pop
         // --------------------------------------------------------
         boolean isPalindrome = true;
-        for (int i = 0; i < input.length(); i++) {
+        while (!queue.isEmpty()) {
+            char dequeuedChar = queue.remove();
             char poppedChar = stack.pop();
-            if (input.charAt(i) != poppedChar) {
+            if (dequeuedChar != poppedChar) {
                 isPalindrome = false;
                 break;
             }
         }
 
         // --------------------------------------------------------
-        // Step 5: Display Palindrome Check Result
+        // Step 6: Display Result
         // --------------------------------------------------------
         if (isPalindrome) {
             System.out.println("Result: The given string is a Palindrome.");
@@ -101,8 +97,8 @@ public class PalindroneCheckerApp {
         }
 
         // --------------------------------------------------------
-        // Step 6: Close Scanner Resource
+        // Step 7: Close Scanner Resource
         // --------------------------------------------------------
-        System.out.println("Application started successfully.");
+        scanner.close();
     }
 }
