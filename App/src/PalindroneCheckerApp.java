@@ -1,44 +1,49 @@
 import java.util.Scanner;
-import java.util.Stack;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * ================================================================
- * MAIN CLASS – UseCase6PalindromeCheckerApp
+ * MAIN CLASS – UseCase8PalindromeCheckerApp
  * ================================================================
  *
- * Use Case 6: Queue + Stack Based Palindrome Check
+ * Use Case 8: Linked List Based Palindrome Checker
  *
  * Description:
- * This class demonstrates palindrome validation using
- * both Queue and Stack data structures to highlight
- * the difference between FIFO (Queue) and LIFO (Stack).
- *
- * At this stage, the application:
- * - Accepts user input via Scanner
- * - Enqueues characters into a Queue (FIFO)
- * - Pushes characters onto a Stack (LIFO)
- * - Compares dequeued characters with popped characters
- * - Determines if the string is a palindrome
+ * This class demonstrates a palindrome check using
+ * a singly linked list. It converts the input string
+ * into a linked list, reverses the second half, and
+ * compares the two halves to determine if the string
+ * is a palindrome.
  *
  * Key Concepts:
- * - Queue: First In First Out (FIFO) principle
- * - Stack: Last In First Out (LIFO) principle
- * - Enqueue & Dequeue operations
- * - Logical comparison of Queue vs Stack output
+ * - Singly Linked List: Dynamic data structure using nodes
+ * - Node Traversal: Sequential access using next references
+ * - Fast and Slow Pointer Technique: Find middle efficiently
+ * - In-Place Reversal: Reverse second half without extra memory
  *
- * Data Structures: Queue, Stack
+ * Data Structure: Singly Linked List
  *
  * Author: Developer
- * Version: 6.0
+ * Version: 8.0
  */
 
-public class UseCase6PalindromeCheckerApp {
+public class UseCase8PalindromeCheckerApp {
+
+    /**
+     * Node class for singly linked list
+     */
+    static class Node {
+        char data;
+        Node next;
+
+        Node(char data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
 
     /**
      * ============================================================
-     * Application Entry Point for UC6
+     * Application Entry Point for UC8
      * ============================================================
      *
      * @param args Command-line arguments
@@ -51,7 +56,7 @@ public class UseCase6PalindromeCheckerApp {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("===== Palindrome Checker App =====");
-        System.out.println("UC6: Queue + Stack Based Palindrome Check");
+        System.out.println("UC8: Linked List Based Palindrome Checker");
         System.out.print("Enter a string: ");
 
         // --------------------------------------------------------
@@ -60,35 +65,62 @@ public class UseCase6PalindromeCheckerApp {
         String input = scanner.nextLine();
 
         // --------------------------------------------------------
-        // Step 3: Initialize Queue and Stack
+        // Step 3: Convert String to Singly Linked List
         // --------------------------------------------------------
-        Queue<Character> queue = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
-
-        // --------------------------------------------------------
-        // Step 4: Enqueue and Push characters
-        // --------------------------------------------------------
+        Node head = null;
+        Node tail = null;
         for (int i = 0; i < input.length(); i++) {
-            char ch = input.charAt(i);
-            queue.add(ch);   // Enqueue character
-            stack.push(ch);  // Push character onto stack
-        }
-
-        // --------------------------------------------------------
-        // Step 5: Compare dequeue vs pop
-        // --------------------------------------------------------
-        boolean isPalindrome = true;
-        while (!queue.isEmpty()) {
-            char dequeuedChar = queue.remove();
-            char poppedChar = stack.pop();
-            if (dequeuedChar != poppedChar) {
-                isPalindrome = false;
-                break;
+            Node newNode = new Node(input.charAt(i));
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
             }
         }
 
         // --------------------------------------------------------
-        // Step 6: Display Result
+        // Step 4: Find Middle Node using Fast and Slow Pointers
+        // --------------------------------------------------------
+        Node slow = head;
+        Node fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // --------------------------------------------------------
+        // Step 5: Reverse Second Half of Linked List
+        // --------------------------------------------------------
+        Node prev = null;
+        Node current = slow;
+        while (current != null) {
+            Node nextNode = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextNode;
+        }
+        Node secondHalfHead = prev; // head of reversed second half
+
+        // --------------------------------------------------------
+        // Step 6: Compare First Half and Reversed Second Half
+        // --------------------------------------------------------
+        Node firstHalfPointer = head;
+        Node secondHalfPointer = secondHalfHead;
+        boolean isPalindrome = true;
+
+        while (secondHalfPointer != null) {
+            if (firstHalfPointer.data != secondHalfPointer.data) {
+                isPalindrome = false;
+                break;
+            }
+            firstHalfPointer = firstHalfPointer.next;
+            secondHalfPointer = secondHalfPointer.next;
+        }
+
+        // --------------------------------------------------------
+        // Step 7: Display Result
         // --------------------------------------------------------
         if (isPalindrome) {
             System.out.println("Result: The given string is a Palindrome.");
@@ -97,7 +129,7 @@ public class UseCase6PalindromeCheckerApp {
         }
 
         // --------------------------------------------------------
-        // Step 7: Close Scanner Resource
+        // Step 8: Close Scanner Resource
         // --------------------------------------------------------
         scanner.close();
     }
