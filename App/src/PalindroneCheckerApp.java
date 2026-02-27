@@ -22,7 +22,7 @@
  * @version 2.0
  */
 
-public class UseCase2PalindromeCheckerApp {
+public class PalindroneCheckerApp {
 
     /**
      * ============================================================
