@@ -34,7 +34,7 @@ import java.util.Queue;
  * Version: 6.0
  */
 
-public class UseCase6PalindromeCheckerApp {
+public class PalindroneCheckerApp {
 
     /**
      * ============================================================
