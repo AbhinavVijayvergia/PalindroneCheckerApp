@@ -26,7 +26,7 @@ import java.util.Scanner;
  * Version: 8.0
  */
 
-public class UseCase8PalindromeCheckerApp {
+public class PalindroneCheckerApp {
 
     /**
      * Node class for singly linked list
