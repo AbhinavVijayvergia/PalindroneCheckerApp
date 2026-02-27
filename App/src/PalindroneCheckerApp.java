@@ -1,4 +1,51 @@
-import java.util.Scanner;
+/**
+ * ================================================================
+ * MAIN CLASS – UseCase2PalindromeCheckerApp
+ * ================================================================
+ *
+ * Use Case 2: Hardcoded Palindrome Validation
+ *
+ * Description:
+ * This class demonstrates basic palindrome validation
+ * using a hardcoded string value.
+ *
+ * At this stage, the application:
+ * - Stores a predefined string
+ * - Reverses the string using loop logic
+ * - Compares the original and reversed strings
+ * - Displays the result on the console
+ *
+ * This use case introduces fundamental string manipulation
+ * and comparison logic before taking user input.
+ *
+ * @author Developer
+ * @version 2.0
+ */
+
+/**
+ * ================================================================
+ * MAIN CLASS – PalindroneCheckerApp
+ * ================================================================
+ *
+ * Use Case 3: Palindrome Check Using String Reverse
+ *
+ * Description:
+ * This class allows the user to input a string and
+ * checks whether it is a palindrome by reversing
+ * the string and comparing it with the original.
+ *
+ * At this stage, the application:
+ * - Accepts user input via Scanner
+ * - Reverses the input string using a for loop
+ * - Compares the original and reversed strings
+ * - Displays the palindrome check result on the console
+ *
+ * This use case demonstrates string reversal and
+ * basic user interaction.
+ *
+ * @author Developer
+ * @version 3.0
+ */
 
 /**
  * ================================================================
@@ -41,8 +88,7 @@ public class PalindroneCheckerApp {
         // --------------------------------------------------------
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("===== Palindrome Checker App =====");
-        System.out.println("UC4: Character Array Based Palindrome Check");
+        System.out.println("=== UC3: Palindrome Check Using String Reverse ===");
         System.out.print("Enter a string: ");
 
         // --------------------------------------------------------
@@ -62,13 +108,12 @@ public class PalindroneCheckerApp {
         int end = characters.length - 1;
         boolean isPalindrome = true;
 
-        while (start < end) {
-            if (characters[start] != characters[end]) {
-                isPalindrome = false;
-                break;
-            }
-            start++;
-            end--;
+        // --------------------------------------------------------
+        // Step 3: Reverse the String Using a For Loop
+        // --------------------------------------------------------
+        String reversed = "";
+        for (int i = original.length() - 1; i >= 0; i--) {
+            reversed = reversed + original.charAt(i);   // String concatenation
         }
 
         // --------------------------------------------------------
