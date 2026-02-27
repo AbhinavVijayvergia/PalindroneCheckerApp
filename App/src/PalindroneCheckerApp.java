@@ -56,7 +56,7 @@ class PalindromeChecker {
  * MAIN APPLICATION CLASS – UseCase11PalindromeCheckerApp
  * ================================================================
  */
-public class UseCase11PalindromeCheckerApp {
+public class PalindroneCheckerApp {
 
     /**
      * Application Entry Point for UC11
