@@ -47,11 +47,36 @@
  * @version 3.0
  */
 
+/**
+ * ================================================================
+ * MAIN CLASS – PalindroneCheckerApp
+ * ================================================================
+ *
+ * Use Case 4: Character Array Based Palindrome Check
+ *
+ * Description:
+ * This class accepts a user input string and checks
+ * if it is a palindrome by comparing characters
+ * from both ends using a two-pointer approach.
+ *
+ * At this stage, the application:
+ * - Converts the input string into a character array
+ * - Uses two pointers to compare characters from start and end
+ * - Determines if the string is a palindrome based on comparison
+ * - Displays the result on the console
+ *
+ * This use case introduces array manipulation and
+ * efficient palindrome checking logic.
+ *
+ * @author Developer
+ * @version 4.0
+ */
+
 public class PalindroneCheckerApp {
 
     /**
      * ============================================================
-     * Application Entry Point for UC3
+     * Application Entry Point for UC4
      * ============================================================
      *
      * @param args Command-line arguments
@@ -69,7 +94,19 @@ public class PalindroneCheckerApp {
         // --------------------------------------------------------
         // Step 2: Read Input String from User
         // --------------------------------------------------------
-        String original = scanner.nextLine();
+        String input = scanner.nextLine();
+
+        // --------------------------------------------------------
+        // Step 3: Convert String to Character Array
+        // --------------------------------------------------------
+        char[] characters = input.toCharArray();
+
+        // --------------------------------------------------------
+        // Step 4: Use Two-Pointer Approach to Check Palindrome
+        // --------------------------------------------------------
+        int start = 0;
+        int end = characters.length - 1;
+        boolean isPalindrome = true;
 
         // --------------------------------------------------------
         // Step 3: Reverse the String Using a For Loop
@@ -80,16 +117,16 @@ public class PalindroneCheckerApp {
         }
 
         // --------------------------------------------------------
-        // Step 4: Compare Original and Reversed Strings
+        // Step 5: Display Result to User
         // --------------------------------------------------------
-        if (original.equals(reversed)) {
-            System.out.println("Result: The string is a Palindrome.");
+        if (isPalindrome) {
+            System.out.println("Result: The given string is a Palindrome.");
         } else {
             System.out.println("Result: The given string is NOT a Palindrome.");
         }
 
         // --------------------------------------------------------
-        // Step 5: Close Scanner Resource
+        // Step 6: Close Scanner Resource
         // --------------------------------------------------------
         scanner.close();
     }
