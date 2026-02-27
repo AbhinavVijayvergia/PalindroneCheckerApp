@@ -78,7 +78,7 @@ class DequeStrategy implements PalindromeStrategy {
  * MAIN APPLICATION CLASS – UseCase12PalindromeCheckerApp
  * ================================================================
  */
-public class UseCase12PalindromeCheckerApp {
+public class PalindroneCheckerApp {
 
     /**
      * Application Entry Point for UC12
