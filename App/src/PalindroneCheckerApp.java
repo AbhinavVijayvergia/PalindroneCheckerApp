@@ -25,56 +25,7 @@ import java.util.LinkedList;
  * Version: 13.0
  */
 
-public class UseCase13PalindromeCheckerApp {
-
-    /**
-     * Stack-based palindrome check
-     */
-    public static boolean stackPalindrome(String input) {
-        Stack<Character> stack = new Stack<>();
-        for (char c : input.toCharArray()) {
-            stack.push(c);
-        }
-        for (char c : input.toCharArray()) {
-            if (stack.pop() != c) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Deque-based palindrome check
-     */
-    public static boolean dequePalindrome(String input) {
-        Deque<Character> deque = new LinkedList<>();
-        for (char c : input.toCharArray()) {
-            deque.addLast(c);
-        }
-        while (deque.size() > 1) {
-            if (deque.removeFirst() != deque.removeLast()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Case-insensitive & space-ignored palindrome check
-     */
-    public static boolean normalizedPalindrome(String input) {
-        String normalized = input.replaceAll("\\s+", "").toLowerCase();
-        int start = 0;
-        int end = normalized.length() - 1;
-        while (start < end) {
-            if (normalized.charAt(start) != normalized.charAt(end)) {
-                return false;
-            }
-            start++;
-            end--;
-        }
-        return true;
-    }
+public class PalindroneCheckerApp {
 
     /**
      * ============================================================
