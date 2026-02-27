@@ -4,25 +4,36 @@ public class PalindroneCheckerApp {
 
     public static void main(String[] args) {
 
-        // Create Scanner object
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("=== UC3: Palindrome Check Using String Reverse ===");
+        System.out.println("===== Palindrome Checker App =====");
+        System.out.println("UC4: Character Array Based Palindrome Check");
         System.out.print("Enter a string: ");
-        String original = scanner.nextLine();
 
-        // Reverse string using for loop
-        String reversed = "";
+        String input = scanner.nextLine();
 
-        for (int i = original.length() - 1; i >= 0; i--) {
-            reversed = reversed + original.charAt(i);   // String concatenation
+        // Convert string to character array
+        char[] characters = input.toCharArray();
+
+        // Two-pointer approach
+        int start = 0;
+        int end = characters.length - 1;
+
+        boolean isPalindrome = true;
+
+        while (start < end) {
+            if (characters[start] != characters[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
         }
 
-        // Compare original and reversed using equals()
-        if (original.equals(reversed)) {
-            System.out.println("Result: The string is a Palindrome.");
+        if (isPalindrome) {
+            System.out.println("Result: The given string is a Palindrome.");
         } else {
-            System.out.println("Result: The string is NOT a Palindrome.");
+            System.out.println("Result: The given string is NOT a Palindrome.");
         }
 
         scanner.close();
