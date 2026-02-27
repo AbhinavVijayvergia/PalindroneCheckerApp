@@ -2,48 +2,58 @@ import java.util.Scanner;
 
 /**
  * ================================================================
- * MAIN CLASS – UseCase8PalindromeCheckerApp
+ * MAIN CLASS – UseCase9PalindromeCheckerApp
  * ================================================================
  *
- * Use Case 8: Linked List Based Palindrome Checker
+ * Use Case 9: Recursive Palindrome Checker
  *
  * Description:
- * This class demonstrates a palindrome check using
- * a singly linked list. It converts the input string
- * into a linked list, reverses the second half, and
- * compares the two halves to determine if the string
- * is a palindrome.
+ * This class checks whether a given string is a palindrome
+ * using recursion. It compares characters from the start
+ * and end positions recursively until all pairs match or
+ * a mismatch is found.
  *
  * Key Concepts:
- * - Singly Linked List: Dynamic data structure using nodes
- * - Node Traversal: Sequential access using next references
- * - Fast and Slow Pointer Technique: Find middle efficiently
- * - In-Place Reversal: Reverse second half without extra memory
+ * - Recursion: A method calling itself to solve smaller problems
+ * - Base Condition: Prevents infinite recursion and terminates calls
+ * - Call Stack: Memory structure managing recursive calls
  *
- * Data Structure: Singly Linked List
+ * Data Structure: Call Stack
  *
  * Author: Developer
- * Version: 8.0
+ * Version: 9.0
  */
 
-public class UseCase8PalindromeCheckerApp {
+public class UseCase9PalindromeCheckerApp {
 
     /**
-     * Node class for singly linked list
+     * ============================================================
+     * Recursive Method to Check Palindrome
+     * ============================================================
+     *
+     * @param str Input string
+     * @param start Start index for comparison
+     * @param end End index for comparison
+     * @return true if palindrome, false otherwise
      */
-    static class Node {
-        char data;
-        Node next;
-
-        Node(char data) {
-            this.data = data;
-            this.next = null;
+    public static boolean isPalindromeRecursive(String str, int start, int end) {
+        // Base condition: Single character or crossed indices
+        if (start >= end) {
+            return true;
         }
+
+        // If characters at start and end do not match
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call: move towards the center
+        return isPalindromeRecursive(str, start + 1, end - 1);
     }
 
     /**
      * ============================================================
-     * Application Entry Point for UC8
+     * Application Entry Point for UC9
      * ============================================================
      *
      * @param args Command-line arguments
@@ -56,7 +66,7 @@ public class UseCase8PalindromeCheckerApp {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("===== Palindrome Checker App =====");
-        System.out.println("UC8: Linked List Based Palindrome Checker");
+        System.out.println("UC9: Recursive Palindrome Checker");
         System.out.print("Enter a string: ");
 
         // --------------------------------------------------------
@@ -65,62 +75,12 @@ public class UseCase8PalindromeCheckerApp {
         String input = scanner.nextLine();
 
         // --------------------------------------------------------
-        // Step 3: Convert String to Singly Linked List
+        // Step 3: Call Recursive Method
         // --------------------------------------------------------
-        Node head = null;
-        Node tail = null;
-        for (int i = 0; i < input.length(); i++) {
-            Node newNode = new Node(input.charAt(i));
-            if (head == null) {
-                head = newNode;
-                tail = newNode;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-            }
-        }
+        boolean isPalindrome = isPalindromeRecursive(input, 0, input.length() - 1);
 
         // --------------------------------------------------------
-        // Step 4: Find Middle Node using Fast and Slow Pointers
-        // --------------------------------------------------------
-        Node slow = head;
-        Node fast = head;
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        // --------------------------------------------------------
-        // Step 5: Reverse Second Half of Linked List
-        // --------------------------------------------------------
-        Node prev = null;
-        Node current = slow;
-        while (current != null) {
-            Node nextNode = current.next;
-            current.next = prev;
-            prev = current;
-            current = nextNode;
-        }
-        Node secondHalfHead = prev; // head of reversed second half
-
-        // --------------------------------------------------------
-        // Step 6: Compare First Half and Reversed Second Half
-        // --------------------------------------------------------
-        Node firstHalfPointer = head;
-        Node secondHalfPointer = secondHalfHead;
-        boolean isPalindrome = true;
-
-        while (secondHalfPointer != null) {
-            if (firstHalfPointer.data != secondHalfPointer.data) {
-                isPalindrome = false;
-                break;
-            }
-            firstHalfPointer = firstHalfPointer.next;
-            secondHalfPointer = secondHalfPointer.next;
-        }
-
-        // --------------------------------------------------------
-        // Step 7: Display Result
+        // Step 4: Display Result
         // --------------------------------------------------------
         if (isPalindrome) {
             System.out.println("Result: The given string is a Palindrome.");
@@ -129,7 +89,7 @@ public class UseCase8PalindromeCheckerApp {
         }
 
         // --------------------------------------------------------
-        // Step 8: Close Scanner Resource
+        // Step 5: Close Scanner Resource
         // --------------------------------------------------------
         scanner.close();
     }
