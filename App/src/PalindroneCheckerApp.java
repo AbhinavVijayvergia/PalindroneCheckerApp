@@ -5,61 +5,48 @@ import java.util.LinkedList;
 
 /**
  * ================================================================
- * MAIN CLASS – UseCase12PalindromeCheckerApp
+ * MAIN CLASS – UseCase13PalindromeCheckerApp
  * ================================================================
  *
- * Use Case 12: Strategy Pattern for Palindrome Algorithms
+ * Use Case 13: Performance Comparison of Palindrome Algorithms
  *
  * Description:
- * This class demonstrates the Strategy design pattern
- * by allowing the palindrome checking algorithm to be
- * chosen dynamically at runtime. Different strategies
- * (Stack-based, Deque-based) can be applied without
- * changing the client code.
+ * This class demonstrates the comparison of execution time
+ * for multiple palindrome checking algorithms, such as
+ * Stack-based, Deque-based, and Case-Insensitive methods.
  *
  * Key Concepts:
- * - Interface: Define a contract for palindrome strategies
- * - Polymorphism: Use different strategy implementations
- * - Strategy Pattern: Encapsulate algorithms and switch dynamically
+ * - System.nanoTime(): Measure precise execution time
+ * - Algorithm comparison: Evaluate performance differences
  *
- * Data Structure: Varies per strategy (Stack / Deque)
+ * Data Structures: Stack, Deque, String / Array
  *
  * Author: Developer
- * Version: 12.0
+ * Version: 13.0
  */
 
-/**
- * PalindromeStrategy interface – defines the contract for algorithms
- */
-interface PalindromeStrategy {
-    boolean isPalindrome(String input);
-}
+public class UseCase13PalindromeCheckerApp {
 
-/**
- * Stack-based palindrome strategy
- */
-class StackStrategy implements PalindromeStrategy {
-    @Override
-    public boolean isPalindrome(String input) {
+    /**
+     * Stack-based palindrome check
+     */
+    public static boolean stackPalindrome(String input) {
         Stack<Character> stack = new Stack<>();
         for (char c : input.toCharArray()) {
             stack.push(c);
         }
         for (char c : input.toCharArray()) {
-            if (c != stack.pop()) {
+            if (stack.pop() != c) {
                 return false;
             }
         }
         return true;
     }
-}
 
-/**
- * Deque-based palindrome strategy
- */
-class DequeStrategy implements PalindromeStrategy {
-    @Override
-    public boolean isPalindrome(String input) {
+    /**
+     * Deque-based palindrome check
+     */
+    public static boolean dequePalindrome(String input) {
         Deque<Character> deque = new LinkedList<>();
         for (char c : input.toCharArray()) {
             deque.addLast(c);
@@ -71,17 +58,28 @@ class DequeStrategy implements PalindromeStrategy {
         }
         return true;
     }
-}
-
-/**
- * ================================================================
- * MAIN APPLICATION CLASS – UseCase12PalindromeCheckerApp
- * ================================================================
- */
-public class UseCase12PalindromeCheckerApp {
 
     /**
-     * Application Entry Point for UC12
+     * Case-insensitive & space-ignored palindrome check
+     */
+    public static boolean normalizedPalindrome(String input) {
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
+        int start = 0;
+        int end = normalized.length() - 1;
+        while (start < end) {
+            if (normalized.charAt(start) != normalized.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+
+    /**
+     * ============================================================
+     * Application Entry Point for UC13
+     * ============================================================
      *
      * @param args Command-line arguments
      */
@@ -93,39 +91,44 @@ public class UseCase12PalindromeCheckerApp {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("===== Palindrome Checker App =====");
-        System.out.println("UC12: Strategy Pattern for Palindrome Algorithms");
+        System.out.println("UC13: Performance Comparison");
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
         // --------------------------------------------------------
-        // Step 2: Choose strategy at runtime
+        // Step 2: Measure execution time for Stack-based algorithm
         // --------------------------------------------------------
-        System.out.println("Choose strategy: 1=Stack, 2=Deque");
-        int choice = scanner.nextInt();
-        PalindromeStrategy strategy;
-
-        if (choice == 1) {
-            strategy = new StackStrategy();
-        } else {
-            strategy = new DequeStrategy();
-        }
+        long startStack = System.nanoTime();
+        boolean stackResult = stackPalindrome(input);
+        long endStack = System.nanoTime();
+        long stackTime = endStack - startStack;
 
         // --------------------------------------------------------
-        // Step 3: Apply chosen strategy
+        // Step 3: Measure execution time for Deque-based algorithm
         // --------------------------------------------------------
-        boolean isPalindrome = strategy.isPalindrome(input);
+        long startDeque = System.nanoTime();
+        boolean dequeResult = dequePalindrome(input);
+        long endDeque = System.nanoTime();
+        long dequeTime = endDeque - startDeque;
 
         // --------------------------------------------------------
-        // Step 4: Display Result
+        // Step 4: Measure execution time for Normalized algorithm
         // --------------------------------------------------------
-        if (isPalindrome) {
-            System.out.println("Result: The given string is a Palindrome (Strategy applied).");
-        } else {
-            System.out.println("Result: The given string is NOT a Palindrome.");
-        }
+        long startNormalized = System.nanoTime();
+        boolean normalizedResult = normalizedPalindrome(input);
+        long endNormalized = System.nanoTime();
+        long normalizedTime = endNormalized - startNormalized;
 
         // --------------------------------------------------------
-        // Step 5: Close Scanner Resource
+        // Step 5: Display results and execution times
+        // --------------------------------------------------------
+        System.out.println("\n===== Performance Results =====");
+        System.out.println("Stack-based result: " + (stackResult ? "Palindrome" : "Not Palindrome") + ", Time: " + stackTime + " ns");
+        System.out.println("Deque-based result: " + (dequeResult ? "Palindrome" : "Not Palindrome") + ", Time: " + dequeTime + " ns");
+        System.out.println("Normalized result: " + (normalizedResult ? "Palindrome" : "Not Palindrome") + ", Time: " + normalizedTime + " ns");
+
+        // --------------------------------------------------------
+        // Step 6: Close Scanner Resource
         // --------------------------------------------------------
         scanner.close();
     }
