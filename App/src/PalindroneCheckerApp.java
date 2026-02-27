@@ -1,26 +1,3 @@
-/**
- * ================================================================
- * MAIN CLASS – UseCase2PalindromeCheckerApp
- * ================================================================
- *
- * Use Case 2: Hardcoded Palindrome Validation
- *
- * Description:
- * This class demonstrates basic palindrome validation
- * using a hardcoded string value.
- *
- * At this stage, the application:
- * - Stores a predefined string
- * - Reverses the string using loop logic
- * - Compares the original and reversed strings
- * - Displays the result on the console
- *
- * This use case introduces fundamental string manipulation
- * and comparison logic before taking user input.
- *
- * @author Developer
- * @version 2.0
- */
 
 /**
  * ================================================================
