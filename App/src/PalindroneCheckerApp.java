@@ -33,7 +33,7 @@ import java.util.Scanner;
  * Version: 7.0
  */
 
-public class UseCase7PalindromeCheckerApp {
+public class PalindroneCheckerApp {
 
     /**
      * ============================================================
