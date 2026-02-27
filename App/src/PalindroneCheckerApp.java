@@ -1,44 +1,35 @@
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * ================================================================
- * MAIN CLASS – UseCase6PalindromeCheckerApp
+ * MAIN CLASS – UseCase13PalindromeCheckerApp
  * ================================================================
  *
- * Use Case 6: Queue + Stack Based Palindrome Check
+ * Use Case 13: Performance Comparison of Palindrome Algorithms
  *
  * Description:
- * This class demonstrates palindrome validation using
- * both Queue and Stack data structures to highlight
- * the difference between FIFO (Queue) and LIFO (Stack).
- *
- * At this stage, the application:
- * - Accepts user input via Scanner
- * - Enqueues characters into a Queue (FIFO)
- * - Pushes characters onto a Stack (LIFO)
- * - Compares dequeued characters with popped characters
- * - Determines if the string is a palindrome
+ * This class demonstrates the comparison of execution time
+ * for multiple palindrome checking algorithms, such as
+ * Stack-based, Deque-based, and Case-Insensitive methods.
  *
  * Key Concepts:
- * - Queue: First In First Out (FIFO) principle
- * - Stack: Last In First Out (LIFO) principle
- * - Enqueue & Dequeue operations
- * - Logical comparison of Queue vs Stack output
+ * - System.nanoTime(): Measure precise execution time
+ * - Algorithm comparison: Evaluate performance differences
  *
- * Data Structures: Queue, Stack
+ * Data Structures: Stack, Deque, String / Array
  *
  * Author: Developer
- * Version: 6.0
+ * Version: 13.0
  */
 
 public class PalindroneCheckerApp {
 
     /**
      * ============================================================
-     * Application Entry Point for UC6
+     * Application Entry Point for UC13
      * ============================================================
      *
      * @param args Command-line arguments
@@ -51,53 +42,44 @@ public class PalindroneCheckerApp {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("===== Palindrome Checker App =====");
-        System.out.println("UC6: Queue + Stack Based Palindrome Check");
+        System.out.println("UC13: Performance Comparison");
         System.out.print("Enter a string: ");
-
-        // --------------------------------------------------------
-        // Step 2: Read Input String from User
-        // --------------------------------------------------------
         String input = scanner.nextLine();
 
         // --------------------------------------------------------
-        // Step 3: Initialize Queue and Stack
+        // Step 2: Measure execution time for Stack-based algorithm
         // --------------------------------------------------------
-        Queue<Character> queue = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
+        long startStack = System.nanoTime();
+        boolean stackResult = stackPalindrome(input);
+        long endStack = System.nanoTime();
+        long stackTime = endStack - startStack;
 
         // --------------------------------------------------------
-        // Step 4: Enqueue and Push characters
+        // Step 3: Measure execution time for Deque-based algorithm
         // --------------------------------------------------------
-        for (int i = 0; i < input.length(); i++) {
-            char ch = input.charAt(i);
-            queue.add(ch);   // Enqueue character
-            stack.push(ch);  // Push character onto stack
-        }
+        long startDeque = System.nanoTime();
+        boolean dequeResult = dequePalindrome(input);
+        long endDeque = System.nanoTime();
+        long dequeTime = endDeque - startDeque;
 
         // --------------------------------------------------------
-        // Step 5: Compare dequeue vs pop
+        // Step 4: Measure execution time for Normalized algorithm
         // --------------------------------------------------------
-        boolean isPalindrome = true;
-        while (!queue.isEmpty()) {
-            char dequeuedChar = queue.remove();
-            char poppedChar = stack.pop();
-            if (dequeuedChar != poppedChar) {
-                isPalindrome = false;
-                break;
-            }
-        }
+        long startNormalized = System.nanoTime();
+        boolean normalizedResult = normalizedPalindrome(input);
+        long endNormalized = System.nanoTime();
+        long normalizedTime = endNormalized - startNormalized;
 
         // --------------------------------------------------------
-        // Step 6: Display Result
+        // Step 5: Display results and execution times
         // --------------------------------------------------------
-        if (isPalindrome) {
-            System.out.println("Result: The given string is a Palindrome.");
-        } else {
-            System.out.println("Result: The given string is NOT a Palindrome.");
-        }
+        System.out.println("\n===== Performance Results =====");
+        System.out.println("Stack-based result: " + (stackResult ? "Palindrome" : "Not Palindrome") + ", Time: " + stackTime + " ns");
+        System.out.println("Deque-based result: " + (dequeResult ? "Palindrome" : "Not Palindrome") + ", Time: " + dequeTime + " ns");
+        System.out.println("Normalized result: " + (normalizedResult ? "Palindrome" : "Not Palindrome") + ", Time: " + normalizedTime + " ns");
 
         // --------------------------------------------------------
-        // Step 7: Close Scanner Resource
+        // Step 6: Close Scanner Resource
         // --------------------------------------------------------
         scanner.close();
     }
