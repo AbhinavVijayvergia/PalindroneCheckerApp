@@ -1,25 +1,3 @@
-/**
- * ================================================================
- * MAIN CLASS – PalindromeCheckerApp
- * ================================================================
- *
- * Use Case 1: Application Entry & Welcome Message
- *
- * Description:
- * This class serves as the entry point of the
- * Palindrome Checker App.
- *
- * At this stage, the application:
- * - Initializes the program
- * - Displays a welcome message
- * - Guides the user toward the next use case
- *
- * This use case establishes the basic structure of
- * a Java application before implementing palindrome logic.
- *
- * @author Developer
- * @version 1.0
- */
 
 /**
  * ================================================================
