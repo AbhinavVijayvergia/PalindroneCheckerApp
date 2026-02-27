@@ -1,43 +1,49 @@
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
  * ================================================================
- * MAIN CLASS – UseCase7PalindromeCheckerApp
+ * MAIN CLASS – UseCase8PalindromeCheckerApp
  * ================================================================
  *
- * Use Case 7: Deque-Based Optimized Palindrome Checker
+ * Use Case 8: Linked List Based Palindrome Checker
  *
  * Description:
- * This class demonstrates an optimized palindrome check
- * using a Deque (Double Ended Queue) to compare characters
- * from the front and rear ends of the input string.
- *
- * At this stage, the application:
- * - Accepts user input via Scanner
- * - Inserts each character into a Deque
- * - Compares first and last characters using removeFirst() and removeLast()
- * - Continues comparison until Deque is empty
- * - Determines if the string is a palindrome
+ * This class demonstrates a palindrome check using
+ * a singly linked list. It converts the input string
+ * into a linked list, reverses the second half, and
+ * compares the two halves to determine if the string
+ * is a palindrome.
  *
  * Key Concepts:
- * - Deque: Double Ended Queue allowing insertion and deletion
- *   from both ends
- * - Optimized palindrome checking without reversal structures
- * - Efficient front/rear character comparison
+ * - Singly Linked List: Dynamic data structure using nodes
+ * - Node Traversal: Sequential access using next references
+ * - Fast and Slow Pointer Technique: Find middle efficiently
+ * - In-Place Reversal: Reverse second half without extra memory
  *
- * Data Structure: Deque
+ * Data Structure: Singly Linked List
  *
  * Author: Developer
- * Version: 7.0
+ * Version: 8.0
  */
 
-public class UseCase7PalindromeCheckerApp {
+public class UseCase8PalindromeCheckerApp {
+
+    /**
+     * Node class for singly linked list
+     */
+    static class Node {
+        char data;
+        Node next;
+
+        Node(char data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
 
     /**
      * ============================================================
-     * Application Entry Point for UC7
+     * Application Entry Point for UC8
      * ============================================================
      *
      * @param args Command-line arguments
@@ -50,7 +56,7 @@ public class UseCase7PalindromeCheckerApp {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("===== Palindrome Checker App =====");
-        System.out.println("UC7: Deque-Based Optimized Palindrome Checker");
+        System.out.println("UC8: Linked List Based Palindrome Checker");
         System.out.print("Enter a string: ");
 
         // --------------------------------------------------------
@@ -59,33 +65,62 @@ public class UseCase7PalindromeCheckerApp {
         String input = scanner.nextLine();
 
         // --------------------------------------------------------
-        // Step 3: Initialize Deque
+        // Step 3: Convert String to Singly Linked List
         // --------------------------------------------------------
-        Deque<Character> deque = new LinkedList<>();
-
-        // --------------------------------------------------------
-        // Step 4: Insert Characters into Deque
-        // --------------------------------------------------------
+        Node head = null;
+        Node tail = null;
         for (int i = 0; i < input.length(); i++) {
-            deque.addLast(input.charAt(i));  // Add character to rear
-        }
-
-        // --------------------------------------------------------
-        // Step 5: Compare Front and Rear Characters
-        // --------------------------------------------------------
-        boolean isPalindrome = true;
-
-        while (deque.size() > 1) { // Compare until 0 or 1 elements left
-            char front = deque.removeFirst();
-            char rear = deque.removeLast();
-            if (front != rear) {
-                isPalindrome = false;
-                break;
+            Node newNode = new Node(input.charAt(i));
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
             }
         }
 
         // --------------------------------------------------------
-        // Step 6: Display Result
+        // Step 4: Find Middle Node using Fast and Slow Pointers
+        // --------------------------------------------------------
+        Node slow = head;
+        Node fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // --------------------------------------------------------
+        // Step 5: Reverse Second Half of Linked List
+        // --------------------------------------------------------
+        Node prev = null;
+        Node current = slow;
+        while (current != null) {
+            Node nextNode = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextNode;
+        }
+        Node secondHalfHead = prev; // head of reversed second half
+
+        // --------------------------------------------------------
+        // Step 6: Compare First Half and Reversed Second Half
+        // --------------------------------------------------------
+        Node firstHalfPointer = head;
+        Node secondHalfPointer = secondHalfHead;
+        boolean isPalindrome = true;
+
+        while (secondHalfPointer != null) {
+            if (firstHalfPointer.data != secondHalfPointer.data) {
+                isPalindrome = false;
+                break;
+            }
+            firstHalfPointer = firstHalfPointer.next;
+            secondHalfPointer = secondHalfPointer.next;
+        }
+
+        // --------------------------------------------------------
+        // Step 7: Display Result
         // --------------------------------------------------------
         if (isPalindrome) {
             System.out.println("Result: The given string is a Palindrome.");
@@ -94,7 +129,7 @@ public class UseCase7PalindromeCheckerApp {
         }
 
         // --------------------------------------------------------
-        // Step 7: Close Scanner Resource
+        // Step 8: Close Scanner Resource
         // --------------------------------------------------------
         scanner.close();
     }
