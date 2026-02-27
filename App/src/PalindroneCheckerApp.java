@@ -25,7 +25,7 @@ import java.util.LinkedList;
  * Version: 13.0
  */
 
-public class UseCase13PalindromeCheckerApp {
+public class PalindroneCheckerApp {
 
     /**
      * Stack-based palindrome check
