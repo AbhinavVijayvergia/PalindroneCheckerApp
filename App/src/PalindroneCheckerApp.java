@@ -21,7 +21,7 @@ import java.util.Scanner;
  * Version: 10.0
  */
 
-public class UseCase10PalindromeCheckerApp {
+public class  PalindroneCheckerApp {
 
     /**
      * ============================================================
