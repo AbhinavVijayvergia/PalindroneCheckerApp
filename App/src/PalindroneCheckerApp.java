@@ -2,35 +2,27 @@ import java.util.Scanner;
 
 public class PalindroneCheckerApp {
 
-    // Method to check if a string is palindrome
-    public static boolean isPalindrome(String input) {
-        // Remove spaces and convert to lowercase
-        String cleaned = input.replaceAll("\\s+", "").toLowerCase();
-
-        int left = 0;
-        int right = cleaned.length() - 1;
-
-        while (left < right) {
-            if (cleaned.charAt(left) != cleaned.charAt(right)) {
-                return false;
-            }
-            left++;
-            right--;
-        }
-        return true;
-    }
-
     public static void main(String[] args) {
+
+        // Create Scanner object
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("=== Palindrome Checker App ===");
-        System.out.print("Enter a word or phrase: ");
-        String input = scanner.nextLine();
+        System.out.println("=== UC3: Palindrome Check Using String Reverse ===");
+        System.out.print("Enter a string: ");
+        String original = scanner.nextLine();
 
-        if (isPalindrome(input)) {
-            System.out.println("✅ It is a palindrome!");
+        // Reverse string using for loop
+        String reversed = "";
+
+        for (int i = original.length() - 1; i >= 0; i--) {
+            reversed = reversed + original.charAt(i);   // String concatenation
+        }
+
+        // Compare original and reversed using equals()
+        if (original.equals(reversed)) {
+            System.out.println("Result: The string is a Palindrome.");
         } else {
-            System.out.println("❌ It is NOT a palindrome.");
+            System.out.println("Result: The string is NOT a Palindrome.");
         }
 
         scanner.close();
